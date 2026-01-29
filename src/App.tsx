@@ -1,3 +1,5 @@
+import Text from "./components/text";
+
 export default function App() {
-  return <div className='text-gray-400'>Olá mundo</div>;
+  return <Text as="span" variant="body-sm-semibold">Olá mundo</Text>;
 }
