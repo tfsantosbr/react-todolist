@@ -1,12 +1,5 @@
 import React from "react";
-
-const commonClassNames = "font-sans text-gray-400";
-
-const textVariants = {
-  "body-md-regular": "text-base leading-6 font-normal",
-  "body-md-semibold": "text-base leading-6 font-semibold",
-  "body-sm-semibold": "text-sm leading-6 font-semibold",
-};
+import { commonTextClassNames, textVariants } from "../constants/textVariants";
 
 interface TextProps {
   as?: keyof React.JSX.IntrinsicElements;
@@ -26,7 +19,7 @@ export default function Text({
     as,
     {
       className:
-        `${commonClassNames} ${textVariants[variant]} ${className || ""}`.trim(),
+        `${commonTextClassNames} ${textVariants[variant]} ${className || ""}`.trim(),
       ...props,
     },
     children,
