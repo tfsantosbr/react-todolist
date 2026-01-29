@@ -19,7 +19,7 @@ export default function Text({
     as,
     {
       className:
-        `${commonTextClassNames} ${textVariants[variant]} ${className || ""}`.trim(),
+        `${commonTextClassNames} ${textVariants[variant]} ${className || ""}`,
       ...props,
     },
     children,
