@@ -1,7 +1,7 @@
-import { iconAnimationVariants } from "../constants/iconAnimationVariants";
+import { iconAnimationVariants } from "./variants/iconVariants";
 
-interface IconProps extends React.SVGProps<SVGSVGElement> {
-  svg: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+interface IconProps extends React.ComponentProps<"svg"> {
+  svg: React.FC<React.ComponentProps<"svg">>;
   className?: string;
   animation?: keyof typeof iconAnimationVariants;
 }

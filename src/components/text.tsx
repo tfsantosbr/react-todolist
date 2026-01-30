@@ -1,7 +1,7 @@
 import React from "react";
-import { commonTextClassNames, textVariants } from "../constants/textVariants";
+import { commonTextClassNames, textVariants } from "./variants/textVariants";
 
-interface TextProps {
+interface TextProps  {
   as?: keyof React.JSX.IntrinsicElements;
   variant?: keyof typeof textVariants;
   className?: string;
