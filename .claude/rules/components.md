@@ -7,6 +7,14 @@ paths:
 
 When creating UI components, follow this structure:
 
+## File naming
+
+Use **kebab-case** for all component filenames:
+- Component file: `src/components/component-name.tsx`
+- Variants file: `src/components/variants/componentNameVariants.tsx`
+
+Examples: `button-icon.tsx`, `input-text.tsx`, `icon.tsx`
+
 ## 1. Variants file: `src/components/variants/<componentName>Variants.tsx`
 
 Define all styling as plain exported `const` objects — no CVA or external variant libraries.
@@ -32,7 +40,7 @@ export const xxxIconVariants = { ... };
 export const xxxIconSizes = { ... };
 ```
 
-## 2. Component file: `src/components/<componentName>.tsx`
+## 2. Component file: `src/components/<component-name>.tsx`
 
 ```tsx
 import { defaultXxxStyles, xxxVariants, xxxSizes, xxxDisabledStyles } from './variants/xxxVariants';

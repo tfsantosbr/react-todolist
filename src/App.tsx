@@ -8,7 +8,8 @@ import XIcon from './assets/icons/x.svg?react';
 import Icon from './components/icon';
 import { Badge } from './components/badge';
 import Button from './components/button';
-import ButtonIcon from './components/buttonIcon';
+import ButtonIcon from './components/button-icon';
+import InputText from './components/input-text';
 
 export default function App() {
   return (
@@ -45,6 +46,11 @@ export default function App() {
         <ButtonIcon icon={TrashIcon} />
         <ButtonIcon icon={TrashIcon} variant='secondary' />
         <ButtonIcon icon={TrashIcon} variant='tertiary' />
+      </div>
+
+      <div className='flex gap-4'>
+        <InputText placeholder='Add Task' />
+        <InputText placeholder='Disabled' disabled />
       </div>
     </div>
   );
