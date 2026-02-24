@@ -14,3 +14,7 @@ export const badgeTextVariants = {
 export const badgeSizeVariants = {
   sm: "py-0.5 px-2",
 };
+
+export const badgeSkeletonSizes = {
+  sm: "w-6 h-6",
+};

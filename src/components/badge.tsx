@@ -1,14 +1,17 @@
 import {
+  badgeSkeletonSizes,
   badgeSizeVariants,
   badgeTextVariants,
   badgeVariants,
   defaultBadgeStyles,
 } from "./variants/badgeVariants";
 import Text from "./text";
+import Skeleton from "./skeleton";
 
 interface BadgeProps extends React.ComponentProps<"div"> {
   variant?: keyof typeof badgeVariants | keyof typeof badgeTextVariants;
   size?: keyof typeof badgeSizeVariants;
+  loading?: boolean;
 }
 
 export function Badge({
@@ -16,8 +19,20 @@ export function Badge({
   size = "sm",
   className,
   children,
+  loading,
   ...props
 }: BadgeProps) {
+  if (loading) {
+    return (
+      <Skeleton
+        rounded="full"
+        className={[defaultBadgeStyles, badgeSkeletonSizes[size], className]
+          .filter(Boolean)
+          .join(" ")}
+      />
+    );
+  }
+
   return (
     <div
       className={[

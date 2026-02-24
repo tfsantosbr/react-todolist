@@ -8,6 +8,7 @@ import {
   buttonIconIconVariants,
   buttonIconIconSizes,
 } from './variants/buttonIconVariants';
+import Skeleton from './skeleton';
 
 type ButtonIconVariant = keyof typeof buttonIconVariants;
 type ButtonIconSize = keyof typeof buttonIconSizes;
@@ -17,6 +18,7 @@ interface ButtonIconProps extends Omit<React.ComponentProps<'button'>, 'size'> {
   size?: ButtonIconSize;
   icon: React.ComponentProps<typeof Icon>['svg'];
   className?: string;
+  loading?: boolean;
 }
 
 export default function ButtonIcon({
@@ -25,8 +27,20 @@ export default function ButtonIcon({
   disabled = false,
   className,
   icon,
+  loading,
   ...props
 }: ButtonIconProps) {
+  if (loading) {
+    return (
+      <Skeleton
+        rounded="sm"
+        className={[defaultButtonIconStyles, buttonIconSizes[size], className]
+          .filter(Boolean)
+          .join(' ')}
+      />
+    );
+  }
+
   const buttonClassName = [
     defaultButtonIconStyles,
     buttonIconVariants[variant],
