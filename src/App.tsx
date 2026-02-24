@@ -10,6 +10,7 @@ import { Badge } from './components/badge';
 import Button from './components/button';
 import ButtonIcon from './components/button-icon';
 import InputText from './components/input-text';
+import InputCheckbox from './components/input-checkbox';
 
 export default function App() {
   return (
@@ -51,6 +52,13 @@ export default function App() {
       <div className='flex gap-4'>
         <InputText placeholder='Add Task' />
         <InputText placeholder='Disabled' disabled />
+      </div>
+
+      <div className='flex gap-4'>
+        <InputCheckbox />
+        <InputCheckbox defaultChecked />
+        <InputCheckbox disabled />
+        <InputCheckbox defaultChecked disabled />
       </div>
     </div>
   );
