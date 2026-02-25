@@ -1,4 +1,4 @@
-interface MainContentProps extends React.ComponentProps<"main"> {}
+type MainContentProps = React.ComponentProps<"main">
 
 export default function MainContent({
   children,
