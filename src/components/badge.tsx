@@ -14,7 +14,7 @@ interface BadgeProps extends React.ComponentProps<"div"> {
   loading?: boolean;
 }
 
-export function Badge({
+export default function Badge({
   variant = "primary",
   size = "sm",
   className,
