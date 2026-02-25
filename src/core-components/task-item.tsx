@@ -8,7 +8,7 @@ import XIcon from "../assets/icons/x.svg?react";
 import CheckIcon from "../assets/icons/check.svg?react";
 import InputText from "../components/input-text";
 
-export function TaskItem() {
+export default function TaskItem() {
   const [isEditing, setIsEditing] = useState(false);
 
   function handleEditTask() {
