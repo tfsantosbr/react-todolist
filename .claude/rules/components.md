@@ -1,6 +1,7 @@
 ---
 paths:
   - "src/components/**/*.tsx"
+  - "src/core-components/**/*.tsx"
 ---
 
 # Component Pattern
