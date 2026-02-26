@@ -1,5 +1,5 @@
 import useLocalStorage from "use-local-storage";
-import type { Task } from "../models/task";
+import { TaskState, type Task } from "../models/task";
 import { TASKS_COLLECTION_KEY } from "../constants/task-contants";
 
 export default function useTasks() {
@@ -7,7 +7,7 @@ export default function useTasks() {
 
     return {
         tasks,
-        tasksCount: tasks.length,
+        createdTasksCount: tasks.filter(task=>task.state === TaskState.Created).length,
         concludedTasksCount: tasks.filter((task) => task.concluded).length,
     }
 }
