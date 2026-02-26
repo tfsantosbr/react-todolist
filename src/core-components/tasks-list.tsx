@@ -3,7 +3,7 @@ import PlusIcon from "../assets/icons/plus.svg?react";
 import TaskItem from "./task-item";
 import useTasks from "../hooks/use-tasks";
 import useTask from "../hooks/use-task";
-import { Task, TaskState } from "../models/task";
+import { type Task, TaskState } from "../models/task";
 
 export default function TasksList() {
   const { tasks, isLoadingTasks } = useTasks();
