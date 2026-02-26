@@ -1,6 +1,6 @@
 import Container from "../components/container";
 import TasksSummary from "../core-components/tasks-summary";
-import TasksList from "../core-components/tasks.list";
+import TasksList from "../core-components/tasks-list";
 
 export default function PageHome() {
   return (
