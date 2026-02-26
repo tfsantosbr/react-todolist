@@ -8,9 +8,16 @@ import PencilIcon from "../assets/icons/pencil.svg?react";
 import XIcon from "../assets/icons/x.svg?react";
 import CheckIcon from "../assets/icons/check.svg?react";
 import InputText from "../components/input-text";
+import { TaskState, type Task } from "../models/task";
 
-export default function TaskItem() {
-  const [isEditing, setIsEditing] = useState(false);
+export interface TaskItemProps {
+  task?: Task;
+}
+
+export default function TaskItem({ task }: TaskItemProps) {
+  const [isEditing, setIsEditing] = useState(
+    task?.state === TaskState.Creating,
+  );
 
   function handleEditTask() {
     setIsEditing(true);
@@ -24,7 +31,7 @@ export default function TaskItem() {
     <Card size="md" className="flex items-center gap-4">
       {isEditing ? (
         <>
-          <InputText className="flex-1" value="🛒 Fazer compras da semana" />
+          <InputText className="flex-1" />
           <div className="flex gap-1">
             <ButtonIcon
               icon={XIcon}
@@ -36,8 +43,17 @@ export default function TaskItem() {
         </>
       ) : (
         <>
-          <InputCheckbox />
-          <Text className="flex-1">🛒 Fazer compras da semana</Text>
+          <InputCheckbox
+            checked={task?.concluded}
+            value={task?.concluded?.toString()}
+          />
+          <Text
+            className={["flex-1", task?.concluded ? "line-through" : ""]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            {task?.title}
+          </Text>
           <div className="flex gap-1">
             <ButtonIcon icon={TrashIcon} variant="tertiary" />
             <ButtonIcon
