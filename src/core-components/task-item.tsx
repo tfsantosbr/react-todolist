@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ButtonIcon from "../components/button-icon";
 import Card from "../components/card";
+import Text from "../components/text";
 import InputCheckbox from "../components/input-checkbox";
 import TrashIcon from "../assets/icons/trash.svg?react";
 import PencilIcon from "../assets/icons/pencil.svg?react";
@@ -36,7 +37,7 @@ export default function TaskItem() {
       ) : (
         <>
           <InputCheckbox />
-          <text className="flex-1">🛒 Fazer compras da semana</text>
+          <Text className="flex-1">🛒 Fazer compras da semana</Text>
           <div className="flex gap-1">
             <ButtonIcon icon={TrashIcon} variant="tertiary" />
             <ButtonIcon
