@@ -10,19 +10,21 @@ import CheckIcon from "../assets/icons/check.svg?react";
 import InputText from "../components/input-text";
 import { TaskState, type Task } from "../models/task";
 import useTask from "../hooks/use-task";
+import Skeleton from "../components/skeleton";
 
 export interface TaskItemProps {
-  task?: Task;
+  task: Task;
+  loading?: boolean;
 }
 
-export default function TaskItem({ task }: TaskItemProps) {
+export default function TaskItem({ task, loading }: TaskItemProps) {
   const [isEditing, setIsEditing] = useState(
     task?.state === TaskState.Creating,
   );
 
   const [taskTitle, setTaskTitle] = useState(task?.title || "");
 
-  const { updateTask, updateTaskConcludedStatus, deleteTask } = useTask();
+  const { updateTask, updateTaskConcludedStatus, deleteTask, isDeletingTask, isUpdatingTask } = useTask();
 
   function handleEditTask() {
     setIsEditing(true);
@@ -41,16 +43,16 @@ export default function TaskItem({ task }: TaskItemProps) {
 
   function handleChangeTaskStatus(event: React.ChangeEvent<HTMLInputElement>) {
     const taskChecked = event.target.checked;
-    updateTaskConcludedStatus(task!.id, taskChecked);
+    updateTaskConcludedStatus(task.id, taskChecked);
   }
 
-  function handleDeleteTask() {
-    deleteTask(task!.id);
+  async function handleDeleteTask() {
+    await deleteTask(task.id);
   }
 
-  function handleSaveTask(event: React.SubmitEvent<HTMLFormElement>) {
+  async function handleSaveTask(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
-    updateTask(task!.id, { title: taskTitle });
+    await updateTask(task.id, { title: taskTitle });
     setIsEditing(false);
   }
 
@@ -72,7 +74,12 @@ export default function TaskItem({ task }: TaskItemProps) {
               variant="secondary"
               onClick={handleCancelEditTask}
             />
-            <ButtonIcon type="submit" icon={CheckIcon} variant="primary" />
+            <ButtonIcon
+              type="submit"
+              icon={CheckIcon}
+              variant="primary"
+              handling={isUpdatingTask}
+            />
           </div>
         </form>
       ) : (
@@ -80,26 +87,34 @@ export default function TaskItem({ task }: TaskItemProps) {
           <InputCheckbox
             checked={task?.concluded}
             onChange={handleChangeTaskStatus}
+            loading={loading}
           />
-          <Text
-            className={["flex-1", task?.concluded ? "line-through" : ""]
-              .filter(Boolean)
-              .join(" ")}
-          >
-            {task?.title}
-          </Text>
+          {!loading ? (
+            <Text
+              className={["flex-1", task?.concluded ? "line-through" : ""]
+                .filter(Boolean)
+                .join(" ")}
+            >
+              {task?.title}
+            </Text>
+          ) : (
+            <Skeleton className="flex-1 h-6" />
+          )}
           <div className="flex gap-1">
             <ButtonIcon
               type="button"
               icon={TrashIcon}
               variant="tertiary"
               onClick={handleDeleteTask}
+              loading={loading}
+              handling={isDeletingTask}
             />
             <ButtonIcon
               type="button"
               icon={PencilIcon}
               variant="tertiary"
               onClick={handleEditTask}
+              loading={loading}
             />
           </div>
         </div>

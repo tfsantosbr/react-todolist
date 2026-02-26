@@ -12,6 +12,7 @@ export const buttonIconSizes = {
 };
 
 export const buttonIconDisabledStyles = 'opacity-50 pointer-events-none';
+export const buttonIconHandlingStyles = 'pointer-events-none';
 
 export const buttonIconIconBaseStyles = 'transition';
 export const buttonIconIconVariants = {
