@@ -19,6 +19,8 @@ export default function TaskItem({ task }: TaskItemProps) {
     task?.state === TaskState.Creating,
   );
 
+  const [taskTitle, setTaskTitle] = useState("");
+
   function handleEditTask() {
     setIsEditing(true);
   }
@@ -27,22 +29,40 @@ export default function TaskItem({ task }: TaskItemProps) {
     setIsEditing(false);
   }
 
+  function handleChangeTaskTitle(event: React.ChangeEvent<HTMLInputElement>) {
+    setTaskTitle(event.target.value);
+  }
+
+  function handleSaveTask(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    console.log("Salvar tarefa:", task?.id, taskTitle);
+
+    setIsEditing(false);
+  }
+
   return (
-    <Card size="md" className="flex items-center gap-4">
+    <Card size="md">
       {isEditing ? (
-        <>
-          <InputText className="flex-1" />
+        <form onSubmit={handleSaveTask} className="flex items-center gap-2">
+          <InputText
+            className="flex-1"
+            onChange={handleChangeTaskTitle}
+            required
+            autoFocus
+          />
           <div className="flex gap-1">
             <ButtonIcon
+              type="button"
               icon={XIcon}
               variant="secondary"
               onClick={handleCancelEditTask}
             />
-            <ButtonIcon icon={CheckIcon} variant="primary" />
+            <ButtonIcon type="submit" icon={CheckIcon} variant="primary" />
           </div>
-        </>
+        </form>
       ) : (
-        <>
+        <div className="flex items-center gap-2">
           <InputCheckbox
             checked={task?.concluded}
             value={task?.concluded?.toString()}
@@ -55,14 +75,15 @@ export default function TaskItem({ task }: TaskItemProps) {
             {task?.title}
           </Text>
           <div className="flex gap-1">
-            <ButtonIcon icon={TrashIcon} variant="tertiary" />
+            <ButtonIcon type="button" icon={TrashIcon} variant="tertiary" />
             <ButtonIcon
+              type="button"
               icon={PencilIcon}
               variant="tertiary"
               onClick={handleEditTask}
             />
           </div>
-        </>
+        </div>
       )}
     </Card>
   );
